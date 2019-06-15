@@ -11,9 +11,7 @@ try:  # pragma: no cover
 except:  # pragma: no cover
     import pickle
 from decimal import Decimal
-from collections import Iterable
 from collections import namedtuple
-from collections import MutableMapping
 
 py_major_version = sys.version[0]
 py_minor_version = sys.version[2]
@@ -24,12 +22,16 @@ if (py_major_version, py_minor_version) == (2.6):  # pragma: no cover
     sys.exit('Python 2.6 is not supported.')
 
 if py3:  # pragma: no cover
+    from collections.abc import MutableMapping
+    from collections.abc import Iterable
     from builtins import int
     strings = (str, bytes)  # which are both basestring
     numbers = (int, float, complex, datetime.datetime, datetime.date, Decimal)
     from itertools import zip_longest
     items = 'items'
 else:  # pragma: no cover
+    from collections import MutableMapping
+    from collections import Iterable
     strings = (str, unicode)
     numbers = (int, float, long, complex, datetime.datetime, datetime.date, Decimal)
     from itertools import izip_longest as zip_longest

@@ -6,8 +6,6 @@ import sys
 import datetime
 import logging
 from decimal import Decimal
-from collections import Iterable
-from collections import MutableMapping
 
 py_major_version = sys.version[0]
 py_minor_version = sys.version[2]
@@ -18,11 +16,15 @@ if (py_major_version, py_minor_version) == (2.6):  # pragma: no cover
     sys.exit('Python 2.6 is not supported.')
 
 if py3:  # pragma: no cover
+    from collections.abc import Iterable
+    from collections.abc import MutableMapping
     from builtins import int
     strings = (str, bytes)  # which are both basestring
     numbers = (int, float, complex, datetime.datetime, datetime.date, Decimal)
     items = 'items'
 else:  # pragma: no cover
+    from collections import Iterable
+    from collections import MutableMapping
     strings = (str, unicode)
     numbers = (int, float, long, complex, datetime.datetime, datetime.date, Decimal)
     items = 'iteritems'
